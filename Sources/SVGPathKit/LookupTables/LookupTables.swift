@@ -1,6 +1,6 @@
 extension SVGPathKit {
     static let svgPathCommands: [Bool] = {
-        var table = Array(repeating: false, count: 256)
+        var table = Array(repeating: false, count: 123)
         
         // Move commands
         table[77] = true   // M
@@ -36,7 +36,7 @@ extension SVGPathKit {
     }()
     
     static let svgNumberStartChars: [Bool] = {
-        var table = Array(repeating: false, count: 256)
+        var table = Array(repeating: false, count: 58)
         
         // Digits
         table[48] = true   // 0
@@ -57,6 +57,34 @@ extension SVGPathKit {
         // Decimal point
         table[46] = true   // .
         
+        return table
+    }()
+    
+    static let digitChars: [Bool] = {
+        var table = Array(repeating: false, count: 58)
+        
+        // Digits 0-9
+        table[48] = true   // 0
+        table[49] = true   // 1
+        table[50] = true   // 2
+        table[51] = true   // 3
+        table[52] = true   // 4
+        table[53] = true   // 5
+        table[54] = true   // 6
+        table[55] = true   // 7
+        table[56] = true   // 8
+        table[57] = true   // 9
+        
+        return table
+    }()
+    
+    static let whitespace: [Bool] = {
+        var table = Array(repeating: false, count: 256)
+        table[0x09] = true  // Tab
+        table[0x20] = true  // Space
+        table[0x0A] = true  // Line Feed
+        table[0x0C] = true  // Form Feed
+        table[0x0D] = true  // Carriage Return
         return table
     }()
 }
