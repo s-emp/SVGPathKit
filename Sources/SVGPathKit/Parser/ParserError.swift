@@ -1,3 +1,5 @@
-enum ParserError: Error {
+enum ParserError: Equatable, Error {
     case invalidToken(Token)
+    case insufficientArguments
+    case unexpectedArguments
 }
