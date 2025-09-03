@@ -58,3 +58,74 @@ func validNumberStartCharactersReturnTrue(code: Int, description: String) async 
         "ASCII code \(code) (\(description)) should be recognized as valid number start character"
     )
 }
+
+@Test("Create CGPath from simple path string")
+func testCreateCGPathSimple() async throws {
+    let svgPathKit = SVGPathKit(path: "M 10 20 L 30 40 Z")
+    let path = try svgPathKit.createCGPath()
+    
+    #expect(path.isEmpty == false)
+}
+
+@Test("Create CGPath from complex path string")
+func testCreateCGPathComplex() async throws {
+    let pathString = "M 0 0 L 10 10 H 20 V 30 C 25 25 30 30 35 35 S 40 40 45 45 Q 50 50 55 55 T 60 60 Z"
+    let svgPathKit = SVGPathKit(path: pathString)
+    let path = try svgPathKit.createCGPath()
+    
+    #expect(path.isEmpty == false)
+}
+
+@Test("Create CGPath from relative coordinates")
+func testCreateCGPathRelative() async throws {
+    let pathString = "M 10 10 l 5 5 h 10 v 10 c 5 5 10 10 15 15 z"
+    let svgPathKit = SVGPathKit(path: pathString)
+    let path = try svgPathKit.createCGPath()
+    
+    #expect(path.isEmpty == false)
+}
+
+@Test("Create CGPath throws error for invalid path")
+func testCreateCGPathInvalid() async throws {
+    let svgPathKit = SVGPathKit(path: "L 10 20")
+    
+    #expect(throws: ValidatorError.self) {
+        try svgPathKit.createCGPath()
+    }
+}
+
+@Test("Create CGPath throws error for empty path")
+func testCreateCGPathEmpty() async throws {
+    let svgPathKit = SVGPathKit(path: "")
+    
+    #expect(throws: ValidatorError.self) {
+        try svgPathKit.createCGPath()
+    }
+}
+
+@Test("Create CGPath with multiple subpaths")
+func testCreateCGPathMultipleSubpaths() async throws {
+    let pathString = "M 10 10 L 20 20 Z M 30 30 L 40 40"
+    let svgPathKit = SVGPathKit(path: pathString)
+    let path = try svgPathKit.createCGPath()
+    
+    #expect(path.isEmpty == false)
+}
+
+@Test("Create CGPath with arc commands")
+func testCreateCGPathWithArcs() async throws {
+    let pathString = "M 10 10 A 5 5 0 0 1 20 20 Z"
+    let svgPathKit = SVGPathKit(path: pathString)
+    let path = try svgPathKit.createCGPath()
+    
+    #expect(path.isEmpty == false)
+}
+
+@Test("Update path string and create new CGPath")
+func testUpdatePathString() async throws {
+    let svgPathKit = SVGPathKit(path: "M 10 10 L 20 20")
+    svgPathKit.pathString = "M 0 0 L 10 10 Z"
+    let path = try svgPathKit.createCGPath()
+    
+    #expect(path.isEmpty == false)
+}
