@@ -4,7 +4,8 @@ import Testing
 
 @Test(
     arguments: [
-        ("Mm Zz", [Token.command(77), Token.command(109), Token.command(90), Token.command(122)])
+        ("Mm Zz", [Token.command(77), Token.command(109), Token.command(90), Token.command(122)]),
+        ("M 10,20", [Token.command(77), Token.number(10), Token.number(20)]),
     ]
 )
 func testTokenizerCommands(input: String, expected: [Token]) async throws {

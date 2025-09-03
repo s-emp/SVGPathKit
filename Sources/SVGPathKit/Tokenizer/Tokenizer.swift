@@ -1,10 +1,10 @@
 import Foundation
 
-protocol Tokenizer {
+protocol Tokenizing {
     func tokenize(_ pathString: String) throws(TokenError) -> [Token]
 }
 
-final class Tokenize: Tokenizer {
+final class Tokenize: Tokenizing {
     
     // MARK: - Main tokenization methods
     func tokenize(_ pathString: String) throws(TokenError) -> [Token] {
@@ -26,6 +26,9 @@ final class Tokenize: Tokenizer {
                 currentSymbol = iterator.next()
                 
             case isWhitespace(symbol):
+                currentSymbol = iterator.next()
+                
+            case isComma(symbol):
                 currentSymbol = iterator.next()
                 
             default:
@@ -175,12 +178,17 @@ final class Tokenize: Tokenizer {
     private func isExponentLetter(_ byte: UTF8.CodeUnit) -> Bool {
         byte == Constants.lowercaseE || byte == Constants.uppercaseE
     }
+    
+    private func isComma(_ byte: UTF8.CodeUnit) -> Bool {
+        byte == Constants.comma
+    }
 
     // MARK: - Constants
     private enum Constants {
         static let plusSign: UTF8.CodeUnit = 43      // +
         static let minusSign: UTF8.CodeUnit = 45     // -
         static let decimalPoint: UTF8.CodeUnit = 46  // .
+        static let comma: UTF8.CodeUnit = 44         // ,
         static let lowercaseE: UTF8.CodeUnit = 101   // e
         static let uppercaseE: UTF8.CodeUnit = 69    // E
     }
