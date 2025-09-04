@@ -3,6 +3,4 @@ enum ValidatorError: Error {
     case emptyPath
     case invalidArgumentType
     case invalidCommandAfterClosePath
-    case smoothCurveWithoutPreviousCurve
-    case smoothQuadraticWithoutPreviousQuadratic
 }

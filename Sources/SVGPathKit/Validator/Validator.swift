@@ -16,7 +16,6 @@ final class Validator: Validating {
     }
     
     private func validateCommandSequence(_ commands: [Command]) throws {
-        var previousCommand: Command?
         var expectingMoveToAfterClosePath = false
         
         for (index, command) in commands.enumerated() {
@@ -29,18 +28,6 @@ final class Validator: Validating {
             }
             
             switch command {
-            case .smoothCurveTo:
-                guard let prev = previousCommand,
-                      case .curveTo = prev else {
-                    throw ValidatorError.smoothCurveWithoutPreviousCurve
-                }
-                
-            case .smoothQuadraticCurveTo:
-                guard let prev = previousCommand,
-                      case .quadraticCurveTo = prev else {
-                    throw ValidatorError.smoothQuadraticWithoutPreviousQuadratic
-                }
-                
             case .closePath:
                 if index < commands.count - 1 {
                     expectingMoveToAfterClosePath = true
@@ -49,8 +36,6 @@ final class Validator: Validating {
             default:
                 break
             }
-            
-            previousCommand = command
         }
     }
 }

@@ -24,6 +24,20 @@ import Testing
             Command.smoothQuadraticCurveTo(x: 60, y: 60, relative: false),
             Command.arcTo(rx: 5, ry: 5, rotation: 0, largeArc: false, sweep: true, x: 65, y: 65, relative: false),
             Command.closePath
+        ],
+        [
+            Command.moveTo(x: 0, y: 0, relative: false),
+            Command.smoothQuadraticCurveTo(x: 10, y: 10, relative: false),
+            Command.quadraticCurveTo(x1: 15, y1: 15, x: 20, y: 20, relative: false),
+        ],
+        // Valid smooth commands without previous curves (should work per SVG standard)
+        [
+            Command.moveTo(x: 10, y: 20, relative: false),
+            Command.smoothCurveTo(x2: 30, y2: 40, x: 50, y: 60, relative: false)
+        ],
+        [
+            Command.moveTo(x: 10, y: 20, relative: false),
+            Command.smoothQuadraticCurveTo(x: 50, y: 60, relative: false)
         ]
     ]
 )
@@ -57,22 +71,6 @@ func testValidate(_ commands: [Command]) async throws {
                 Command.lineTo(x: 50, y: 60, relative: false)
             ],
             ValidatorError.invalidCommandAfterClosePath
-        ),
-        // SmoothCurveTo without previous CurveTo
-        (
-            [
-                Command.moveTo(x: 10, y: 20, relative: false),
-                Command.smoothCurveTo(x2: 30, y2: 40, x: 50, y: 60, relative: false)
-            ],
-            ValidatorError.smoothCurveWithoutPreviousCurve
-        ),
-        // SmoothQuadraticCurveTo without previous QuadraticCurveTo
-        (
-            [
-                Command.moveTo(x: 10, y: 20, relative: false),
-                Command.smoothQuadraticCurveTo(x: 50, y: 60, relative: false)
-            ],
-            ValidatorError.smoothQuadraticWithoutPreviousQuadratic
         ),
     ]
 )
