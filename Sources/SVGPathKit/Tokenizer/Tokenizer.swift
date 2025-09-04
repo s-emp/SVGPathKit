@@ -4,7 +4,7 @@ protocol Tokenizing {
     func tokenize(_ pathString: String) throws(TokenError) -> [Token]
 }
 
-final class Tokenize: Tokenizing {
+final class Tokenizer: Tokenizing {
     
     // MARK: - Main tokenization methods
     func tokenize(_ pathString: String) throws(TokenError) -> [Token] {

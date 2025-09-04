@@ -9,7 +9,7 @@ import Testing
     ]
 )
 func testTokenizerCommands(input: String, expected: [Token]) async throws {
-    let tokenizer = Tokenize()
+    let tokenizer = Tokenizer()
     let result = try tokenizer.tokenize(input)
     #expect(result == expected)
 }
@@ -22,7 +22,7 @@ func testTokenizerCommands(input: String, expected: [Token]) async throws {
     ]
 )
 func testTokenizerWhitespace(input: String, expected: [Token]) async throws {
-    let tokenizer = Tokenize()
+    let tokenizer = Tokenizer()
     let result = try tokenizer.tokenize(input)
     #expect(result == expected)
 }
@@ -43,7 +43,7 @@ func testTokenizerWhitespace(input: String, expected: [Token]) async throws {
     ]
 )
 func testTokenizerSVGNumbers(input: String, expected: [Token]) async throws {
-    let tokenizer = Tokenize()
+    let tokenizer = Tokenizer()
     let result = try tokenizer.tokenize(input)
     #expect(result == expected)
 }
