@@ -78,11 +78,58 @@ func testRenderQuadraticCurves() async throws {
     #expect(path.isEmpty == false)
 }
 
-@Test("Render arc command placeholder")
+@Test("Render arc command")
 func testRenderArcCommand() async throws {
     let commands = [
         Command.moveTo(x: 10, y: 10, relative: false),
         Command.arcTo(rx: 5, ry: 5, rotation: 0, largeArc: false, sweep: true, x: 20, y: 20, relative: false)
+    ]
+    
+    let renderer = PathRenderer()
+    let path = renderer.render(commands)
+    
+    #expect(path.isEmpty == false)
+    let boundingBox = path.boundingBox
+    #expect(boundingBox.width > 0)
+    #expect(boundingBox.height > 0)
+}
+
+@Test("Render complex arc scenarios")
+func testRenderComplexArcs() async throws {
+    let commands = [
+        // Test elliptical arc with rotation
+        Command.moveTo(x: 50, y: 50, relative: false),
+        Command.arcTo(rx: 30, ry: 15, rotation: 45, largeArc: false, sweep: true, x: 100, y: 100, relative: false),
+        
+        // Test large arc flag
+        Command.moveTo(x: 10, y: 10, relative: false),
+        Command.arcTo(rx: 20, ry: 20, rotation: 0, largeArc: true, sweep: false, x: 50, y: 10, relative: false),
+        
+        // Test relative arc
+        Command.moveTo(x: 0, y: 0, relative: false),
+        Command.arcTo(rx: 10, ry: 10, rotation: 0, largeArc: false, sweep: true, x: 20, y: 0, relative: true)
+    ]
+    
+    let renderer = PathRenderer()
+    let path = renderer.render(commands)
+    
+    #expect(path.isEmpty == false)
+}
+
+@Test("Render degenerate arc cases")
+func testRenderDegenerateArcs() async throws {
+    let commands = [
+        // Zero radius should become line
+        Command.moveTo(x: 10, y: 10, relative: false),
+        Command.arcTo(rx: 0, ry: 5, rotation: 0, largeArc: false, sweep: true, x: 20, y: 20, relative: false),
+        
+        // Same start and end point
+        Command.moveTo(x: 30, y: 30, relative: false),
+        Command.arcTo(rx: 5, ry: 5, rotation: 0, largeArc: false, sweep: true, x: 30, y: 30, relative: false),
+        
+        // Normal arc after degenerate cases
+        Command.moveTo(x: 40, y: 40, relative: false),
+        Command.arcTo(rx: 10, ry: 10, rotation: 0, largeArc: false, sweep: true, x: 60, y: 40, relative: false)
     ]
     
     let renderer = PathRenderer()
