@@ -102,6 +102,7 @@ final class PathRenderer: Renderer {
                 lastControlPoint = cp
                 
             case let .arcTo(rx, ry, rotation, largeArc, sweep, x, y, relative):
+                // https://mortoray.com/rendering-an-svg-elliptical-arc-as-bezier-curves/
                 let endPoint = relative ? CGPoint(x: currentPoint.x + x, y: currentPoint.y + y) : CGPoint(x: x, y: y)
                 renderArc(
                     path: path,
