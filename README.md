@@ -193,8 +193,6 @@ SVGPathKit is optimized for performance:
 - **Efficient arc-to-Bézier conversion** using mathematical optimization
 - **Lookup tables** for fast character classification
 
-Typical performance for a complex path with 100+ commands: **< 1ms** on modern devices.
-
 ## Contributing
 
 We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.

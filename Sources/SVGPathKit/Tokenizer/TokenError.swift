@@ -1,7 +1,7 @@
 import Foundation
 
 /// Errors that can occur during SVG path tokenization.
-enum TokenError: Error {
+public enum TokenError: Error {
     /// Encountered an unrecognized character in the path data.
     case unknownToken
     /// Found a malformed or invalid numeric value in the path data.
@@ -12,7 +12,7 @@ enum TokenError: Error {
 
 extension TokenError: LocalizedError {
     /// A localized message describing what error occurred.
-    var errorDescription: String? {
+    public var errorDescription: String? {
         switch self {
         case .unknownToken:
             return NSLocalizedString("Unknown token encountered in SVG path data", 
@@ -24,7 +24,7 @@ extension TokenError: LocalizedError {
     }
     
     /// A localized message describing the reason for the failure.
-    var failureReason: String? {
+    public var failureReason: String? {
         switch self {
         case .unknownToken:
             return NSLocalizedString("The SVG path contains an unrecognized character or symbol", 
@@ -36,7 +36,7 @@ extension TokenError: LocalizedError {
     }
     
     /// A localized message providing recovery suggestion.
-    var recoverySuggestion: String? {
+    public var recoverySuggestion: String? {
         switch self {
         case .unknownToken:
             return NSLocalizedString("Check that the SVG path data uses only valid SVG path commands and syntax", 

@@ -1,7 +1,7 @@
 import Foundation
 
 /// Errors that can occur during SVG path validation.
-enum ValidatorError: Error {
+public enum ValidatorError: Error {
     /// The path does not start with a MoveTo command as required by SVG specification.
     case notFoundMoveTo
     /// The path contains no commands.
@@ -16,7 +16,7 @@ enum ValidatorError: Error {
 
 extension ValidatorError: LocalizedError {
     /// A localized message describing what error occurred.
-    var errorDescription: String? {
+    public var errorDescription: String? {
         switch self {
         case .notFoundMoveTo:
             return NSLocalizedString("SVG path must start with MoveTo command", 
@@ -34,7 +34,7 @@ extension ValidatorError: LocalizedError {
     }
     
     /// A localized message describing the reason for the failure.
-    var failureReason: String? {
+    public var failureReason: String? {
         switch self {
         case .notFoundMoveTo:
             return NSLocalizedString("SVG paths must begin with a MoveTo (M or m) command to establish the initial position", 
@@ -52,7 +52,7 @@ extension ValidatorError: LocalizedError {
     }
     
     /// A localized message providing recovery suggestion.
-    var recoverySuggestion: String? {
+    public var recoverySuggestion: String? {
         switch self {
         case .notFoundMoveTo:
             return NSLocalizedString("Start your SVG path with a MoveTo command, such as 'M 10 20' or 'm 10 20'", 

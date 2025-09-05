@@ -1,7 +1,7 @@
 import Foundation
 
 /// Errors that can occur during SVG path parsing.
-enum ParserError: Equatable, Error {
+public enum ParserError: Equatable, Error {
     /// An invalid token was encountered during parsing.
     case invalidToken(Token)
     /// A command was found with insufficient arguments.
@@ -14,7 +14,7 @@ enum ParserError: Equatable, Error {
 
 extension ParserError: LocalizedError {
     /// A localized message describing what error occurred.
-    var errorDescription: String? {
+    public var errorDescription: String? {
         switch self {
         case .invalidToken(let token):
             return NSLocalizedString("Invalid token '\(token)' encountered while parsing SVG path", 
@@ -29,7 +29,7 @@ extension ParserError: LocalizedError {
     }
     
     /// A localized message describing the reason for the failure.
-    var failureReason: String? {
+    public var failureReason: String? {
         switch self {
         case .invalidToken:
             return NSLocalizedString("The parser encountered a token that cannot be processed in the current context", 
@@ -44,7 +44,7 @@ extension ParserError: LocalizedError {
     }
     
     /// A localized message providing recovery suggestion.
-    var recoverySuggestion: String? {
+    public var recoverySuggestion: String? {
         switch self {
         case .invalidToken:
             return NSLocalizedString("Ensure the SVG path data follows the correct syntax with proper command letters and numeric arguments", 

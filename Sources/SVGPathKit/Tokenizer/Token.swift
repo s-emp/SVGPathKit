@@ -1,4 +1,4 @@
-enum Token: Equatable {
+public enum Token: Equatable, Sendable {
     case command(UTF8.CodeUnit)
     case number(Double)
     
