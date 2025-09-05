@@ -9,11 +9,17 @@ A high-performance Swift library for parsing and rendering SVG path data into Co
 ## Features
 
 ✅ **Complete SVG 2.0 Support** - All path commands including complex elliptical arcs
+
 ✅ **High Performance** - Optimized tokenizer and parser with minimal memory allocation
+
 ✅ **Comprehensive Error Handling** - Detailed error messages with localization support
+
 ✅ **Type Safety** - Strongly typed command system with full Swift error handling
+
 ✅ **Cross-Platform** - Works on iOS, macOS, tvOS, and watchOS
+
 ✅ **Extensive Testing** - 100% test coverage with comprehensive validation
+
 ✅ **DocC Documentation** - Complete API documentation with examples
 
 ### Supported SVG Path Commands
